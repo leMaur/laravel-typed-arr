@@ -1,6 +1,11 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Call to an undefined static method static\\(Lemaur\\\\LaravelTypedArr\\\\LaravelTypedArrServiceProvider\\)\\:\\:camelCaseKeys\\(\\)\\.$#"
+			count: 1
+			path: src/LaravelTypedArrServiceProvider.php
+
+		-
 			message: "#^Call to an undefined static method static\\(Lemaur\\\\LaravelTypedArr\\\\LaravelTypedArrServiceProvider\\)\\:\\:get\\(\\)\\.$#"
 			count: 8
 			path: src/LaravelTypedArrServiceProvider.php
@@ -13,4 +18,19 @@ parameters:
 		-
 			message: "#^Call to an undefined static method static\\(Lemaur\\\\LaravelTypedArr\\\\LaravelTypedArrServiceProvider\\)\\:\\:isNotFilled\\(\\)\\.$#"
 			count: 2
+			path: src/LaravelTypedArrServiceProvider.php
+
+		-
+			message: "#^Call to an undefined static method static\\(Lemaur\\\\LaravelTypedArr\\\\LaravelTypedArrServiceProvider\\)\\:\\:kebabCaseKeys\\(\\)\\.$#"
+			count: 1
+			path: src/LaravelTypedArrServiceProvider.php
+
+		-
+			message: "#^Call to an undefined static method static\\(Lemaur\\\\LaravelTypedArr\\\\LaravelTypedArrServiceProvider\\)\\:\\:snakeCaseKeys\\(\\)\\.$#"
+			count: 1
+			path: src/LaravelTypedArrServiceProvider.php
+
+		-
+			message: "#^Call to an undefined static method static\\(Lemaur\\\\LaravelTypedArr\\\\LaravelTypedArrServiceProvider\\)\\:\\:studlyCaseKeys\\(\\)\\.$#"
+			count: 1
 			path: src/LaravelTypedArrServiceProvider.php

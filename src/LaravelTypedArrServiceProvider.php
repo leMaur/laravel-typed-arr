@@ -4,6 +4,7 @@ namespace Lemaur\LaravelTypedArr;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -142,6 +143,86 @@ class LaravelTypedArrServiceProvider extends PackageServiceProvider
          */
         Arr::macro('isNotFilled', function ($array, $key) {
             return static::isEmptyString($array, $key);
+        });
+
+        /**
+         * Convert to kebab-case all keys for the given array.
+         *
+         * @param  \ArrayAccess|array  $array
+         * @return array
+         */
+        Arr::macro('kebabCaseKeys', static function ($array) {
+            return collect($array)->mapWithKeys(function ($value, $key) {
+                if (is_string($key)) {
+                    $key = Str::of($key)->ascii()->headline()->kebab()->toString();
+                }
+
+                if (is_iterable($value)) {
+                    return [$key => static::kebabCaseKeys($value)];
+                }
+
+                return [$key => $value];
+            })->all();
+        });
+
+        /**
+         * Convert to snake_case all keys for the given array.
+         *
+         * @param  \ArrayAccess|array  $array
+         * @return array
+         */
+        Arr::macro('snakeCaseKeys', static function ($array) {
+            return collect($array)->mapWithKeys(function ($value, $key) {
+                if (is_string($key)) {
+                    $key = Str::of($key)->ascii()->headline()->snake()->toString();
+                }
+
+                if (is_iterable($value)) {
+                    return [$key => static::snakeCaseKeys($value)];
+                }
+
+                return [$key => $value];
+            })->all();
+        });
+
+        /**
+         * Convert to camelCase all keys for the given array.
+         *
+         * @param  \ArrayAccess|array  $array
+         * @return array
+         */
+        Arr::macro('camelCaseKeys', static function ($array) {
+            return collect($array)->mapWithKeys(function ($value, $key) {
+                if (is_string($key)) {
+                    $key = Str::of($key)->ascii()->headline()->camel()->toString();
+                }
+
+                if (is_iterable($value)) {
+                    return [$key => static::camelCaseKeys($value)];
+                }
+
+                return [$key => $value];
+            })->all();
+        });
+
+        /**
+         * Convert to StudlyCase all keys for the given array.
+         *
+         * @param  \ArrayAccess|array  $array
+         * @return array
+         */
+        Arr::macro('studlyCaseKeys', static function ($array) {
+            return collect($array)->mapWithKeys(function ($value, $key) {
+                if (is_string($key)) {
+                    $key = Str::of($key)->ascii()->headline()->studly()->toString();
+                }
+
+                if (is_iterable($value)) {
+                    return [$key => static::studlyCaseKeys($value)];
+                }
+
+                return [$key => $value];
+            })->all();
         });
     }
 }
